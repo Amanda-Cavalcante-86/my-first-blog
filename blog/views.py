@@ -12,7 +12,10 @@ def post_list(request):
     
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    form = PostForm(request.POST, instance=post)
+    form = PostForm(instance=post)
     return render(request, 'blog/post_detail.html', {'post': post})
+    return redirect('post_detail', pk=post.pk)
 
 def post_new(request):
      if request.method == "POST":
